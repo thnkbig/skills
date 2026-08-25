@@ -1,24 +1,30 @@
-# THNKBIG Agent Roster + Skills Loading
+# Agent Adoption
 
-Each row lists an agent, its manager, home channel, and which skills it loads.
+How agents load skills from this library.
 
-| Agent | Role | Manager | Home channel | Skills loaded |
-|-------|------|---------|--------------|---------------|
-| Pepper | COO | Rudy | #coordination | unslop |
-| Echo | Content & Distribution | Pepper | #seo-content-social | unslop, case-study (pending) |
-| Vision | SEO Analyst | Pepper | #seo-content-social | unslop |
-| Karen | Communications (Email) | Pepper | #business-email | unslop |
-| Reed | Technical Strategy | Pepper | #technical | unslop |
-| Grant | Sales Closer | Pepper | #revenue-deals | unslop |
-| Heimdall | Intelligence & Analytics | Pepper | #intelligence (pending) | unslop |
-| Tony | Revenue & Deals | Pepper | #revenue-deals | unslop |
-| Jarvis | Voice (Phone) | Pepper | #voice-phone (pending) | unslop |
+This file is generic — it documents the adoption pattern, not any specific roster. Each adopting team maintains their own agent-to-skill matrix.
+
+## Adoption matrix (template)
+
+Each adopting team maps their agents to the skills they load:
+
+| Agent | Role | Home context | Skills loaded |
+|-------|------|--------------|---------------|
+| (your-agent-1) | (role) | (channel/orchestrator) | (skill-list) |
+| (your-agent-2) | (role) | (channel/orchestrator) | (skill-list) |
 
 ## Loading mechanics
 
-When an agent needs a skill (per the trigger phrase in their system prompt), they fetch the body via:
-- `gh api repos/thnkbig/skills/contents/skills/<skill-name>/SKILL.md --jq .content | base64 -d`
+When an agent needs a skill, fetch the body via the GitHub API:
 
-Or via a dedicated script (TBD).
+```bash
+gh api repos/thnkbig/skills/contents/skills/<skill-name>/SKILL.md --jq .content | base64 -d
+```
 
-Updates to a skill propagate to all agents on next fetch. No agent-local caching unless explicitly configured per agent.
+Or via a dedicated script in your team tooling.
+
+Updates to a skill propagate to all adopting teams on next fetch. No agent-local caching unless explicitly configured per team.
+
+## Pointer text
+
+The canonical pointer text (one line, added to each adopting agent system prompt) lives in `CONTEXT.md`.

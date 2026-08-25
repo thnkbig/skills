@@ -8,7 +8,13 @@ Each skill lives in its own folder under `skills/<skill-name>/` with a `SKILL.md
 
 | Skill | Purpose | Status |
 |-------|---------|--------|
-| `skills/unslop/` | Tone, framing, and quality patterns for user-facing copy, knowledge-base artifacts, and skills-library contributions | live (body migration pending) |
+| `skills/unslop/` | Tone, framing, and quality patterns for user-facing copy, knowledge-base artifacts, and skills-library contributions | active |
+| `skills/technical-writing/` | Diátaxis + Google dev style + STE + Global English for docs, RFCs, READMEs, PR descriptions | active |
+| `skills/grilling/` | Round-by-round interview to stress-test a plan before commit | active |
+| `skills/principle-make-operations-idempotent/` | Converge to the same end state across crashes, restarts, retries | active |
+| `skills/principle-subtract-before-you-add/` | Remove dead weight, redundant validators, stubs before adding new | active |
+| `skills/principle-migrate-callers-then-delete-legacy-apis/` | Update all callers first, then delete the legacy API | active |
+| `skills/principle-encode-lessons-in-structure/` | Encode recurring rules as lint, flag, runtime check, or script | active |
 | `skills/case-study/` | Distilled case-study creation SOP (10 phases, composite-scenario ethics) | in authoring |
 
 ## Repo layout

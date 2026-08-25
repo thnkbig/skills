@@ -18,5 +18,5 @@
 Canonical format lives here. When new skills are added, append a pointer entry below.
 
 ```text
-When producing user-facing copy, knowledge-base artifacts, or skills-library contributions, fetch the relevant skill body from the thnkbig/skills GitHub repo at `skills/<skill-name>/SKILL.md` for tone, framing, and quality patterns before drafting.
+Apply `skills/unslop/` (auto) before sending user-facing prose longer than one paragraph. Apply `skills/technical-writing/` when writing or reviewing docs, RFCs, READMEs, PR descriptions, or commit messages; pick one Diátaxis mode per doc. Use `skills/grilling/` to stress-test a plan or decision round by round before committing. Apply `skills/principle-make-operations-idempotent/` when designing a command, lifecycle step, or processing loop. Apply `skills/principle-subtract-before-you-add/` when sequencing an addition, refactor, or rewrite. Apply `skills/principle-migrate-callers-then-delete-legacy-apis/` when deprecating an API surface. Apply `skills/principle-encode-lessons-in-structure/` when a rule gets repeated.
 ```

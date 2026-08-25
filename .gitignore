@@ -1,0 +1,14 @@
+# secrets
+secrets.zsh
+*.env
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~

@@ -15,6 +15,12 @@ Each skill lives in its own folder under `skills/<skill-name>/` with a `SKILL.md
 | `skills/principle-subtract-before-you-add/` | Remove dead weight, redundant validators, stubs before adding new | active |
 | `skills/principle-migrate-callers-then-delete-legacy-apis/` | Update all callers first, then delete the legacy API | active |
 | `skills/principle-encode-lessons-in-structure/` | Encode recurring rules as lint, flag, runtime check, or script | active |
+| `skills/principle-build-the-lever/` | Build the codemod / script / generator / delegate skill instead of working by hand | active |
+| `skills/principle-laziness-protocol/` | Bias toward deletion and the smallest change that solves the problem | active |
+| `skills/principle-never-block-on-the-human/` | Proceed on reversible work; reserve confirmation for irreversible actions | active |
+| `skills/principle-prove-it-works/` | Verify against the real artifact, not a proxy, self-report, or "it compiles" | active |
+| `skills/bro/` | Restate the last message in plain human language, no jargon | active |
+| `skills/create-verification-skill/` | Generates a project-local verification skill that drives the target app the way a user does | active |
 | `skills/case-study/` | Distilled case-study creation SOP (10 phases, composite-scenario ethics) | in authoring |
 
 ## Repo layout
@@ -35,6 +41,24 @@ Each skill lives in its own folder under `skills/<skill-name>/` with a `SKILL.md
 1. Create `skills/<skill-name>/SKILL.md` with frontmatter (`title`, `tags`, `status`, `created`) and a markdown body distilled from the canonical source doc.
 2. Update `CHANGELOG.md`.
 3. Reference the skill from your agent system prompt via the pointer text (canonical format in `CONTEXT.md`).
+
+## Cross-machine sync (THNKBIG two-machine setup)
+
+After `git pull`, run `scripts/sync-skills.sh` on each machine (macOS, Linux) to mirror the repo's `skills/<name>/SKILL.md` into three local buzz-acp discovery roots and re-create the symlinks. Idempotent — safe to run after every pull. The script is path-agnostic (`$HOME`-based), so the same script works for `acidburn` on the macmini and `madmin` on the macbook without per-machine edits.
+
+```bash
+cd ~/.buzz/REPOS/thnkbig-skills   # or wherever the repo is cloned
+git pull
+./scripts/sync-skills.sh
+```
+
+Bootstrapping a fresh machine:
+
+```bash
+git clone git@github.com:thnkbig/skills.git ~/.buzz/REPOS/thnkbig-skills
+cd ~/.buzz/REPOS/thnkbig-skills
+./scripts/sync-skills.sh
+```
 
 ## Pointer text
 

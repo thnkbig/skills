@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-28
+
+- Added 6 Tier 1 skills sourced from `cursor/plugins/pstack` (audit: `RESEARCH/PSTACK_SKILLS_AUDIT_2026-08-28.md`):
+  - `skills/bro/` — plain-language restatement of the last message
+  - `skills/principle-build-the-lever/` — codemod/script beats hand-edits
+  - `skills/principle-laziness-protocol/` — bias toward deletion
+  - `skills/principle-never-block-on-the-human/` — proceed on reversible work
+  - `skills/principle-prove-it-works/` — verify against the real artifact
+  - `skills/create-verification-skill/` — per-repo verification bootstrap; body translated from `.cursor/skills/` to `~/.agents/skills/` for non-Cursor runtime; `references/feature-map-example/` mirrored verbatim
+- Added `scripts/sync-skills.sh` — idempotent cross-machine sync. For each `skills/<name>/` in the repo, mirrors `SKILL.md` to `$HOME/.agents/skills/<name>/SKILL.md` and creates symlinks at `$HOME/.buzz/.agents/skills/<name>` and `$HOME/.claude/skills/<name>` (the three buzz-acp discovery roots). Path-agnostic via `$HOME`, so the same script works for `acidburn` on the macmini and `madmin` on the macbook.
+- Updated `README.md` active-skills table (was 8, now 14) and added a "Cross-machine sync (THNKBIG two-machine setup)" section with bootstrap + recurring-pull commands.
+- Extended `CONTEXT.md` pointer text with the 6 new skill triggers.
+
 ## 2026-08-26
 
 - Replaced the `skills/unslop/` placeholder with the full body sourced from `cursor/plugins/pstack/skills/unslop/SKILL.md`. Status `draft` -> `active`.

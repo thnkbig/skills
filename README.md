@@ -22,6 +22,9 @@ Each skill lives in its own folder under `skills/<skill-name>/` with a `SKILL.md
 | `skills/bro/` | Restate the last message in plain human language, no jargon | active |
 | `skills/create-verification-skill/` | Generates a project-local verification skill that drives the target app the way a user does | active |
 | `skills/case-study/` | Distilled case-study creation SOP (10 phases, composite-scenario ethics) | in authoring |
+| `skills/b2b-tech-marketing/` | Strategic frame for B2B tech marketing: outsource vs in-house matrix, services taxonomy, long-form engineer-authored SEO as the primary organic lever, subject-matter expertise is non-substitutable. | active |
+| `skills/inboundsquare-anatomy/` | Article template Echo follows and Editor verifies (intro + summary table + detail sections + recommendations + conclusion); voice, style mechanics, editorial process. | active |
+| `skills/thnkbig-voice-style/` | THNKBIG-specific voice layer: engineer-with-signing-authority reader, THNKBIG POV, proof-anchored claims, conversion lens. | active |
 
 ## Repo layout
 

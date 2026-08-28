@@ -2,6 +2,12 @@
 
 ## 2026-08-28
 
+- Added 3 THNKBIG SEO/content skills authored by Pepper (sourced from Inbound Square's "B2B Tech Marketing Agency: In-Depth Guide" + the 4 Inbound Square docx; conversion lens anchored on Rudy's 2026-08-28 20:36Z reframe + `GUIDES/service-catalog.md`):
+  - `skills/b2b-tech-marketing/` — strategic frame for B2B tech marketing: outsource vs in-house matrix, services taxonomy (planning / traffic / product / tools / website), long-form engineer-authored SEO content as the primary organic lever, multi-agency strategy, and why subject-matter expertise is non-substitutable. THNKBIG application: justifies the in-house agent pipeline (skip/decay/depth detection + Echo/Editor writing+review + Vision SEO lane owner).
+  - `skills/inboundsquare-anatomy/` — article template Echo follows and Editor verifies (intro → summary table → detail sections → recommendations → conclusion); voice rules (engineer-to-engineer, second person, present tense, sentence case, plain language); style mechanics (US English, code blocks not screenshots, ≤2 lists per article); the 8-step editorial process that runs across the THNKBIG agent pipeline.
+  - `skills/thnkbig-voice-style/` — THNKBIG-specific voice layer sitting on top of Inbound Square anatomy. Three rules: (1) direct/technical/confident (no fence-sitting, name the failure mode, show the math, use the THNKBIG wedge); (2) THNKBIG POV (every article has a position); (3) proof-anchored (case studies, compliance wins, specific deliverables — never a number without a source). Conversion lens (who / wedge / proof / CTA / internal-link path) — every article must answer all five before shipping. Canonical ICP + compliance vocabulary sourced from `GUIDES/service-catalog.md`.
+- Updated `CONTEXT.md` pointer text with the 3 new skill triggers (inboundsquare-anatomy, b2b-tech-marketing, thnkbig-voice-style).
+- Updated `README.md` active-skills table to list the 3 new skills (status: active).
 - Added 6 Tier 1 skills sourced from `cursor/plugins/pstack` (audit: `RESEARCH/PSTACK_SKILLS_AUDIT_2026-08-28.md`):
   - `skills/bro/` — plain-language restatement of the last message
   - `skills/principle-build-the-lever/` — codemod/script beats hand-edits

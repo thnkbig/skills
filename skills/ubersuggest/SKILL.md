@@ -1,8 +1,16 @@
 ---
 title: "Ubersuggest"
 tags: [seo, keyword-research, backlinks, site-audit, mcp, neil-patel]
-status: draft
-created: 2026-08-30
+status: active
+activated: 2026-08-30
+activation_gates:
+  oauth_pasteback: passed 2026-08-30 (rudy@thnkbig.com, tier1)
+  smoke_tools_list: passed 2026-08-30 (46 tools vs marketing-page 42, +4 parity drift documented)
+  smoke_cheap_call: passed 2026-08-30 (auth_status 200 isError=false, rudy@thnkbig.com tier1)
+  audit_log: ~/.buzz/.scratch/ubersuggest/audit.log (3 lines: 2x tools_list + auth_status)
+  prompt_block_vision: pending owner-save via buzz agents draft-update (PRD opened 2026-08-30)
+  prompt_block_heimdall: pending owner-save via buzz agents draft-update (PRD opened 2026-08-30)
+  cost_baseline: deferred — 4 weeks @ <=50 calls/wk starting first production call
 sources:
   - "https://ubersuggest-mcp.neilpatelapi.com/mcp"
   - "https://app.neilpatel.com/en/mcp"

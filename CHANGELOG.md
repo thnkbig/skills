@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-30
+
+- Added `skills/ubersuggest/` (status: active). SKILL.md authored by Pepper; activation scaffolding (`.scratch/ubersuggest/` directory + smoke harness) wired by Reed. Endpoint: `https://ubersuggest-mcp.neilpatelapi.com/mcp` (Streamable HTTP, JSON-RPC over SSE, OAuth 2.0 Bearer). Tool surface: 42 marketing-page tools / 46 verified `tools/list` tools across 8 categories (parity delta +4 documented; see SKILL.md activation_gates block). Activation gates cleared: (1) Rudy's Ubersuggest OAuth bearer token paste-back into `~/.buzz/.scratch/ubersuggest/tokens.json` (0600) — rudy@thnkbig.com tier1 verified via `auth_status`; (2) smoke harness passes — `tools/list` 46 tools in tolerance, `auth_status` cheap call 200 isError=false (smoke harness updated post first run to use parameterless `auth_status` instead of `validate_site` with wrong arg shape, and to log per-call audit entries); (3) per-agent prompt integration routed via `buzz agents draft-update` for owner save in Buzz Desktop — Vision + Heimdall additive pointer blocks prepared; Echo/Tony/ops loadout unchanged; always-on block (`unslop` / `technical-writing` / `bro`) unchanged; (4) per-call cost baseline deferred — 4 weeks @ ≤50 calls/wk starting first production call, logged to `RESEARCH/UBERSUGGEST_USAGE_LOG.json` once it exists. Tracking: issue `32ff7069e52a8d70c95e5599897ca04f4832d80d717013b112cbbaf7b9bc7520` on the `thnkbig-skills` project. PR: `feat/skill-ubersuggest` (this branch). Cross-references: `~/.buzz/GUIDES/UBERSUGGEST_INTEGRATION.md`, `~/.buzz/REPOS/thnkbig-skills/skills/ubersuggest/SKILL.md`. `CONTEXT.md` pointer text added on activation — adopters fetch `skills/ubersuggest/SKILL.md` when the trigger fires.
+- Updated `README.md` active-skills table (now 18 rows: 18 active) with the ubersuggest row flipped from `draft` to `active`.
+
 ## 2026-08-28
 
 - Added 6 Tier 1 skills sourced from `cursor/plugins/pstack` (audit: `RESEARCH/PSTACK_SKILLS_AUDIT_2026-08-28.md`):

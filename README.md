@@ -22,6 +22,7 @@ Each skill lives in its own folder under `skills/<skill-name>/` with a `SKILL.md
 | `skills/bro/` | Restate the last message in plain human language, no jargon | active |
 | `skills/create-verification-skill/` | Generates a project-local verification skill that drives the target app the way a user does | active |
 | `skills/case-study/` | Distilled case-study creation SOP (10 phases, composite-scenario ethics) | in authoring |
+| `skills/ubersuggest/` | Neil Patel Ubersuggest MCP (42 SEO tools across domain analysis, keyword research, backlinks, site audit, AI brand visibility, content, projects, utilities) — second-source SEO alongside DataForSEO, OAuth 2.0 Bearer auth, JSON-RPC over SSE. | draft |
 
 ## Repo layout
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-30
+
+- Added `skills/ubersuggest/` (status: draft, pending activation gate). SKILL.md authored by Pepper; activation scaffolding (`.scratch/ubersuggest/` directory + smoke harness) wired by Reed. Endpoint: `https://ubersuggest-mcp.neilpatelapi.com/mcp` (Streamable HTTP, JSON-RPC over SSE, OAuth 2.0 Bearer). Tool surface: 42 tools across 8 categories (per the marketing page — not yet verified by `tools/list`). Activation gate mirrors the Firecrawl + Circleback precedents: (1) Rudy's Ubersuggest OAuth bearer token paste-back into `~/.buzz/.scratch/ubersuggest/tokens.json` (0600); (2) smoke harness passes (`tools/list` returns ~42 tools + one cheap call returns 200); (3) per-agent prompt integration routed via `buzz agents draft-update` for owner save in Buzz Desktop (NOT orphan-template direct edit) — Vision + Heimdall additive blocks; Echo/Tony/ops loadout unchanged; always-on block (`unslop` / `technical-writing` / `bro`) unchanged; (4) per-call cost baseline logged to `RESEARCH/UBERSUGGEST_USAGE_LOG.json` (50 calls/week ceiling). Tracking: issue `32ff7069e52a8d70c95e5599897ca04f4832d80d717013b112cbbaf7b9bc7520` on the `thnkbig-skills` project. PR: `feat/skill-ubersuggest` (this branch). Cross-references: `~/.buzz/GUIDES/UBERSUGGEST_INTEGRATION.md`, `~/.buzz/REPOS/thnkbig-skills/skills/ubersuggest/SKILL.md`. CONTEXT.md pointer text intentionally NOT updated — draft skill does not auto-load.
+- Updated `README.md` active-skills table (now 18 rows: 17 active, 1 draft) with the ubersuggest row.
+
 ## 2026-08-28
 
 - Added 6 Tier 1 skills sourced from `cursor/plugins/pstack` (audit: `RESEARCH/PSTACK_SKILLS_AUDIT_2026-08-28.md`):

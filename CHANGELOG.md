@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-10
+
+- Added `skills/probe-rb2b-webhook/` (status: active). SKILL.md authored by Rudy McComb during the 2026-09-09 wire-debug session (relay event `f2ebcc61450e89acc52be3334b7e03d34da0c6318b078d84b35d438d7157f068`), packaged as `probe-rb2b-webhook.tar.gz` and locked in by Pepper on 2026-09-10. Three-tier end-to-end probe: (1) reachability check (no secret, safe for any agent); (2) auth validation (no real secret, garbage header); (3) authenticated probe (operator-only, requires `OPERATOR_RB2B_SECRET` in env, creates a real Lead). Three payload shapes — 3a reach-only, 3b query-string auth, 3c realistic full RB2B shape (LinkedIn + ICP firmographics + Pages Visited + Tags + Referrer). Hard rules baked into the body: never persist/echo the secret, always clean up probe Leads via UI (`/leads?source=RB2B&company=Example` → select all → Delete), don't probe during operator off-hours, no auto-retry on 401. Companion bash helper at `scripts/probe.sh` with mode arg (`realistic` | `no-linkedin` | `query-string`); unsets `SECRET` + `OPERATOR_RB2B_SECRET` before exit. Cross-references: `thnkbig-crm/app/api/webhooks/rb2b/route.ts:29-69` (verifySecret + email-or-LinkedIn gate), `thnkbig-crm/lib/integration-health.ts` (auth_failed / error heartbeat), `thnkbig-crm/docs/RB2B-DASHBOARD-FILTER.md` (RB2B-side ICP gate, independent of CRM-side gate). Trigger phrases: "test rb2b webhook", "probe rb2b", "is rb2b delivering", "send a test webhook to crm", "rb2b webhook broken", "no new rb2b leads". Lands on branch `feat/skill-probe-rb2b-webhook` (this branch, off `main` at `f4b14d2`).
+- Updated `README.md` active-skills table (now 19 rows: 18 active + 1 in authoring) with the probe-rb2b-webhook row.
+
 ## 2026-08-28
 
 - Added 6 Tier 1 skills sourced from `cursor/plugins/pstack` (audit: `RESEARCH/PSTACK_SKILLS_AUDIT_2026-08-28.md`):

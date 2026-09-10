@@ -22,6 +22,7 @@ Each skill lives in its own folder under `skills/<skill-name>/` with a `SKILL.md
 | `skills/bro/` | Restate the last message in plain human language, no jargon | active |
 | `skills/create-verification-skill/` | Generates a project-local verification skill that drives the target app the way a user does | active |
 | `skills/case-study/` | Distilled case-study creation SOP (10 phases, composite-scenario ethics) | in authoring |
+| `skills/probe-rb2b-webhook/` | Three-tier end-to-end probe for the RB2B → CRM webhook: reachability (no secret), auth validation (no real secret), authenticated probe (operator-only, creates a real Lead). Authored by Rudy McComb after the 2026-09-10 wire-debug session; landing commit wraps the canonical SKILL.md + bash helper. | active |
 
 ## Repo layout
 

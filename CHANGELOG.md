@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-09-14
+
+- Added `skills/scrapegraphai/` (status: active). LLM-driven web scraping API + dual SDKs (Python `scrapegraph-py`, Node `scrapegraph-js`) + vendor MCP server (`scrapegraph-mcp`). Auth is custom header `SGAI-APIKEY: $SGAI_APIKEY` (NOT `Authorization: Bearer`), V2 base URL `https://v2-api.scrapegraphai.com/api/...`. Per-format credit meter verified against the official `/services/scrape` docs page (markdown/html/links/images/summary=1, json=5, screenshot=2, branding=25, stealth=+5, multi-format sum). Six V2 services: `/scrape`, `/extract`, `/search`, `/crawl`, `/monitor`, `/schema` + `/history` + `/events`. Body covers the three survival calls (markdown dump, JSON extract, JS-heavy screenshot), fetch modes (`auto`/`fast`/`js` with `stealth` required on Cloudflare/DataDome), and the 9-mile-high anti-patterns (Bearer auth, V1 endpoint, multi-format sum surprise, `markdown.data` is a list not a string). Authored by Reed in #skills after Rudy's "lock this in" message at 16:27:21Z on `https://scrapegraphai.com`. Three sources verified live at authoring time (landing page, `/introduction`, `/services/scrape`); any field outside those three is not asserted. Activation gates: operator creates account → exports `SGAI_APIKEY` in `~/.zsh/secrets.zsh` → first 2xx curl sanity check. Cross-machine sync via the standard `scripts/sync-skills.sh` — body mirrors to `~/.agents/skills/scrapegraphai/` on each Mac.
+- Updated `README.md` active-skills table with the `scrapegraphai` row (now 17 rows: 16 active + 1 in authoring).
+- Extended `CONTEXT.md` pointer text with the scrapegraphai trigger phrases ("scrape a website", "extract structured data from a page", "scrape to markdown", "scrape to json", "ai scraping").
+
 ## 2026-08-28
 
 - Added 6 Tier 1 skills sourced from `cursor/plugins/pstack` (audit: `RESEARCH/PSTACK_SKILLS_AUDIT_2026-08-28.md`):

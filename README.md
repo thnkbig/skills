@@ -22,6 +22,7 @@ Each skill lives in its own folder under `skills/<skill-name>/` with a `SKILL.md
 | `skills/bro/` | Restate the last message in plain human language, no jargon | active |
 | `skills/create-verification-skill/` | Generates a project-local verification skill that drives the target app the way a user does | active |
 | `skills/case-study/` | Distilled case-study creation SOP (10 phases, composite-scenario ethics) | in authoring |
+| `skills/scrapegraphai/` | LLM-driven web scraping API + SDKs + MCP server. Auth is custom header `SGAI-APIKEY`, not Bearer; V2 base URL is `v2-api.scrapegraphai.com/api/...`. Per-format credit meter (markdown=1, json=5, branding=25). Quick-starts in cURL, Python, Node, and Pydantic-schema JSON extraction. Authored 2026-09-14 by Reed after Rudy's "lock this in" ping in #skills. | active |
 
 ## Repo layout
 

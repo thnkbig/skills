@@ -3,10 +3,14 @@ title: "ScrapeGraphAI — AI Web Scraping API"
 tags: [scraping, extraction, ai, web, llm, api, vendor, probe, scrapegraphai]
 status: active
 created: 2026-09-14
+updated: 2026-09-14
 sources:
   - "https://scrapegraphai.com (vendor landing page, fetched 2026-09-14)"
+  - "https://scrapegraphai.com/pricing (per-endpoint cost + tier table, fetched 2026-09-14, v2 amendment)"
   - "https://docs.scrapegraphai.com/introduction (V2 docs index, verified 2026-09-14)"
   - "https://docs.scrapegraphai.com/services/scrape (per-format pricing table + auth header name, verified 2026-09-14)"
+  - "https://github.com/ScrapeGraphAI/Scrapegraph-ai (OSS library, fetched 2026-09-14)"
+  - "https://github.com/ScrapeGraphAI/scrapegraph-mcp (vendor MCP server README, fetched 2026-09-14, v2 amendment)"
 trigger: "scrape a website", "extract structured data from a page", "scraping api", "scrapegraph", "scrapegraphai", "scrape to markdown", "scrape to json", "extract company info from url", "ai scraping"
 anti_patterns:
   - "Do NOT put the API key in `Authorization: Bearer …` — ScrapeGraphAI uses a custom header `SGAI-APIKEY: $SGAI_APIKEY`. Bearer auth will return 401."
@@ -70,9 +74,9 @@ Other surfaces:
 - **MCP server** — `github.com/ScrapeGraphAI/scrapegraph-mcp` exposes the same surface over MCP for Agent/Cursor/Claude-Code callers.
 - **CLI** — `just-scrape` (npm) wraps the REST API for shell workflows.
 
-## 2. Cost per call — the format meter
+## 2. Cost per call — the per-endpoint meter (verified 2026-09-14)
 
-The dominant surprise: **every format in a `scrape` call is metered separately**, not as one scrape. Live table from `/services/scrape`:
+The dominant surprise: **every format in a `scrape` call is metered separately**, not as one scrape. Live `/scrape` per-format table from `/services/scrape`:
 
 | Format       | Credits |
 | ------------ | ------- |
@@ -87,9 +91,32 @@ The dominant surprise: **every format in a `scrape` call is metered separately**
 
 Multi-format calls sum the format costs. The `stealth: true` flag adds 5 credits. `fetchConfig.mode` (`auto` / `fast` / `js`) does not affect cost.
 
+The other V2 endpoints have their own base + modifier shape (live values from `/pricing`, verified 2026-09-14):
+
+| Endpoint | Base cost | Stealth modifier | Formula |
+|---|---|---|---|
+| `/scrape` | per format (table above) | +5 | `format_base + stealth_modifier`, summed across `formats` array |
+| `/extract` (prompt + URL → JSON) | 5 | +5 | one-shot 5 + stealth top-up if `fetchConfig.stealth=true` |
+| `/search` (web search + extract) | 2 per result (no prompt) / 5 per result (with prompt) | +5 | `(base + stealth) × num_results` |
+| `/crawl` (multi-page) | 2 startup + per-page scrape cost | per-page | `2 + (format_base + stealth) × pages_processed` |
+| `/monitor` (cron + change-detection webhook) | format base on each tick | +5 on change detected | `format_base + stealth + change_bonus` |
+| PDF processing (inside `/scrape`) | 1 per page actually processed | — | `1 × processed_pages` (default cap: 25 pages via `processors:[pdf]`) |
+
 **Implication for budget planning:** the common "scrape + extract JSON" pattern is 1 + 5 = 6 credits — not 1. A six-format scrape (md + html + links + images + summary + json) is 1+1+1+1+1+5 = 10 credits. Pricing is the actual disincentive to over-fetch.
 
 For PDF: 1 credit per page actually processed (not per requested). `processors: [{type: "pdf", maxPages: 25}]` defaults to a 25-page cap; `-1` means unlimited.
+
+**Tier snapshots** (USD/month, monthly billing, from `/pricing`):
+
+| Tier | $ | API credits | req/min | Monitors | Concurrent crawls |
+|---|---|---|---|---|---|
+| **Free** | $0 | 500 one-time | 10 | 1 | 1 |
+| **Starter** | $20 | 10,000/mo | 100 | 5 | 3 |
+| **Growth** (most popular) | $100 | 100,000/mo | 500 | 25 | 15 + basic proxy rotation |
+| **Pro** | $500 | 750,000/mo | 5,000 | 100 | 50 + advanced proxy rotation + priority support |
+| **Enterprise** | custom | ad-hoc | custom | — | SLA |
+
+One-time top-ups stack forever: 1k credits/$5, 10k/$40, 50k/$150. SOC 2 Type II covers every tier.
 
 ## 3. Quick start — the smallest working call
 
@@ -283,11 +310,14 @@ For an MCP-only integration, prefer the vendor's own `scrapegraph-mcp` server �
 
 ## 8. Sources verified in this skill
 
-- `https://docs.scrapegraphai.com/services/scrape` — formats table, credit costs, `SGAI-APIKEY` header, fetchConfig field names. **All of these verified by direct read at authoring time.**
+- `https://docs.scrapegraphai.com/services/scrape` — formats table, per-format credit costs, `SGAI-APIKEY` header, fetchConfig field names. **Verified at authoring time + at the 2026-09-14 v2 amendment.**
 - `https://docs.scrapegraphai.com/introduction` — service index (the 6 services + history + schema).
 - `https://scrapegraphai.com` — marketing positions, integrations list, "V2 better/faster/cheaper" framing.
+- `https://scrapegraphai.com/pricing` — per-endpoint base + stealth cost (added 2026-09-14 v2 amendment: `/extract`, `/search`, `/crawl`, `/monitor`, PDF).
+- `https://github.com/ScrapeGraphAI/Scrapegraph-ai` — open-source library surface (MIT, 31k stars, BYO-LLM graph pipelines, Scrapfly/Firecrawl-alternative positioning).
+- `https://github.com/ScrapeGraphAI/scrapegraph-mcp` — vendor MCP server surface, env vars, tool names (v3 rename migration table), hosted endpoint URL + deprecation note.
 
-Any field not in these three pages — exact dollar pricing, account tiers, quota limits, regional availability — is **not** asserted here. Verify against the live page before quoting numbers to a human.
+Any field not in these six sources — exact per-burst rate limits, regional availability, service-region SLAs — is **not** asserted here. Verify against the live page before quoting numbers to a human.
 
 ## 9. Anti-patterns
 
@@ -301,9 +331,11 @@ Any field not in these three pages — exact dollar pricing, account tiers, quot
 
 ## 10. Verification rules
 
-- The provider's V2 docs page (`https://docs.scrapegraphai.com/services/scrape`) is the source of truth for: the auth header name, the per-format credit cost, the fetch-config field names. If you cite any of those three in a deliverable without re-reading the docs that turn, you've violated this rule.
+- The provider's `/services/scrape` docs page is the source of truth for: the auth header name, the **per-format** `/scrape` credit cost, and the fetch-config field names. If you cite any of those three in a deliverable without re-reading `/services/scrape` that turn, you've violated this rule.
+- The provider's `/pricing` page is the source of truth for: the **per-endpoint** base + stealth costs (the `/extract`, `/search`, `/crawl`, `/monitor`, PDF tables in §2), tier snapshots, and one-time top-up pricing. If you cite any of those in a deliverable without re-reading `/pricing` that turn, you've violated this rule.
+- The provider's `scrapegraph-mcp` GitHub README is the source of truth for: the vendor MCP server tool names (v3 rename migration), env vars (`SGAI_API_KEY` canonical, `SGAI_API_URL`, `SGAI_TIMEOUT`), and the hosted endpoint URL `https://sgai-mcp-main.onrender.com` (the legacy `https://mcp.scrapegraphai.com/mcp` is deprecated — not gated by the deprecation notice yet, but new wiring must use onrender).
 - A successful 2xx response is necessary but not sufficient for "ScrapeGraphAI works for me" — also check (a) the `markdown.data[0]` body is non-empty and (b) for SPAs, the body contains post-load content. Empty `data: []` is the JS-render failure mode.
-- Pricing changes happen without notice (the docs page itself says "see pricing page for full breakdown"). Don't memorize credit counts in durable artifacts; quote the format-meter table above and mark it "verify against `/services/scrape`."
+- Pricing changes happen without notice (the docs page itself says "see pricing page for full breakdown"). Don't memorize credit counts in durable artifacts; quote the per-format table above for `/scrape` and the per-endpoint table for the other five services, and mark both "verify against `/services/scrape` + `/pricing`."
 - The marketing integrations list on the landing page (`LangChain, LlamaIndex, ...`) is verified at authoring time; it grows. Re-check before claiming completeness.
 
 ## 11. Activation gates
